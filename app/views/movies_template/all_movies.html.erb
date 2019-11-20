@@ -1,0 +1,96 @@
+<h1> All Movies </h1>
+
+<hr>
+
+<h2> Add a Movie </h2>
+
+<hr>
+
+<form>
+  <div>
+    <label>Title</label>
+    <input>
+  </div>
+
+  <div>
+    <label>Year</label>
+    <input>
+  </div>
+
+  <div>
+    <label>Description</title>
+    <textarea></textarea>
+  </div>
+
+  <div>
+    <label>Duration</label>
+    <input>
+  </div>
+
+  <div>Image</label>
+    <label>
+    <textarea></textarea>
+  </div>
+
+  <div>
+    <label>Director</label>
+    <input>
+  </div>
+
+  <div>
+    <button>Add movie</button>
+  </div>
+</form>
+
+<table border="!">
+  <tr>
+    <th>
+      Image
+    </th>
+
+    <th>
+      Title
+    </th>
+
+    <th>
+      Year
+    </th>
+
+    <th>
+      Director
+    </th>
+
+    <th>
+      Details
+    </th>
+  </tr>
+
+  <% @movies.each do |the_movie| %>
+    <tr>
+      <td>
+        <img width=100 src="<%= the_movie.image %>">
+      </td>
+
+      <td>
+        <%= the_movie.title %>
+      </td>
+
+      <td>
+        <%= the_movie.year %>
+      </td>
+
+      <td>
+        <a href="/directors/<%= the_movie.director.id %>">
+        <%= the_movie.director.name %>
+      </td>
+
+      <td>
+        <a href="/movies/<%= the_movie.id %>">
+        Show Details
+      </td>
+    </tr>
+  <% end %> 
+
+</table>
+
+

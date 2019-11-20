@@ -1,8 +1,9 @@
 class MoviesController < ApplicationController
   def index
-    movies = Movie.all.order({ :year => :asc })
+    @movies = Movie.all.order({ :year => :asc })
     
-    render({ :json => movies.as_json })
+    #render({ :json => movies.as_json })
+    render( { :template => "/movies_template/all_movies.html.erb"})
   end
   
   def show
