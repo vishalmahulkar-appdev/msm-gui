@@ -2,15 +2,31 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.all.order({ :year => :asc })
     
-    #render({ :json => movies.as_json })
-    render( { :template => "/movies_template/all_movies.html.erb"})
+    respond_to do |format|
+      format.html do
+        render( { :template => "/movies_template/all_movies.html.erb"})
+      end
+
+      format.json do
+        render({ :json => @movies.as_json })
+      end
+    end
   end
   
   def show
     the_id = params.fetch(:the_movie_id)
-    movie = Movie.where({ :id => the_id }).at(0)
+    @movie = Movie.where({ :id => the_id }).at(0)
 
-    render({ :json => movie.as_json })
+    respond_to do |format|
+      format.html do
+        render( { :template => "/movies_template/movie_details.html.erb"})
+      end
+
+      format.json do
+        render({ :json => @movies.as_json })
+      end
+    end
+
   end
   
   def create
@@ -24,7 +40,7 @@ class MoviesController < ApplicationController
 
     movie.save
     
-    render({ :json => movie.as_json })
+    redirect_to("/movies")
   end
   
   def update
@@ -39,7 +55,7 @@ class MoviesController < ApplicationController
 
     movie.save
 
-    render({ :json => movie.as_json })
+    redirect_to("/movies")
   end
   
   def destroy
